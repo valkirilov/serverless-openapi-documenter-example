@@ -1,0 +1,12 @@
+{
+  "title": "Child",
+  "type": "object",
+  "properties": {
+    "child_property": {
+      "type": "string"
+    },
+    "grandChild_reference": {
+      "$ref": "./src/features/echoHelloWorld/serverless/schemas/GrandChild.json"
+    }
+  }
+}

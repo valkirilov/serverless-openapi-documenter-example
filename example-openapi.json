@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "EchoHelloWorldResponse": {
+        "title": "EchoHelloWorldResponse",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GrandChild": {
+        "title": "GrandChild",
+        "type": "object",
+        "properties": {
+          "grandChild_property": {
+            "type": "string"
+          }
+        }
+      },
+      "Child": {
+        "title": "Child",
+        "type": "object",
+        "properties": {
+          "child_property": {
+            "type": "string"
+          },
+          "grandChild_reference": {
+            "title": "GrandChild",
+            "type": "object",
+            "properties": {
+              "grandChild_property": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Parent": {
+        "title": "Parent",
+        "type": "object",
+        "properties": {
+          "parent_property": {
+            "type": "string"
+          },
+          "child_reference": {
+            "$ref": "./src/features/echoHelloWorld/serverless/schemas/Child.json"
+          }
+        }
+      },
+      "Grandpa": {
+        "title": "Grandpa",
+        "type": "object",
+        "properties": {
+          "grandpa_property": {
+            "type": "string"
+          },
+          "parent_reference": {
+            "$ref": "./src/features/echoHelloWorld/serverless/schemas/Parent.json"
+          }
+        }
+      },
+      "name": {
+        "type": "string"
+      },
+      "Access-Control-Allow-Origin": {
+        "type": "string",
+        "default": "*",
+        "example": "https://developer.mozilla.org"
+      },
+      "Access-Control-Allow-Credentials": {
+        "type": "boolean",
+        "default": true
+      }
+    }
+  },
+  "info": {
+    "title": "onboarding",
+    "description": "Example",
+    "version": "38c5e37e-6730-4442-a63e-b9cec53519a5"
+  },
+  "paths": {
+    "/hello-world/{name}": {
+      "get": {
+        "summary": "Simple serverless function which dumps a greeting",
+        "description": "Just print 'Hello World' in the console and welcome the user",
+        "operationId": "onboarding-dev-echoHelloWorld",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the user who we want to greet",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/name"
+            }
+          }
+        ],
+        "tags": [
+          "HelloWorld"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns response containing greetings message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EchoHelloWorldResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode (Request.credentials) is include",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hello-world/example-child": {
+      "get": {
+        "summary": "Example to test schema generation docs",
+        "description": "Just an example",
+        "operationId": "onboarding-dev-exampleSchemaChild",
+        "parameters": [],
+        "tags": [
+          "HelloWorld"
+        ],
+        "responses": {
+          "200": {
+            "description": "Example",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Child"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode (Request.credentials) is include",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hello-world/example-parent": {
+      "get": {
+        "summary": "Example to test schema generation docs",
+        "description": "Just an example",
+        "operationId": "onboarding-dev-exampleSchemaParent",
+        "parameters": [],
+        "tags": [
+          "HelloWorld"
+        ],
+        "responses": {
+          "200": {
+            "description": "Example",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parent"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode (Request.credentials) is include",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hello-world/example-grandpa": {
+      "get": {
+        "summary": "Example to test schema generation docs",
+        "description": "Just an example",
+        "operationId": "onboarding-dev-exampleSchemaGrandpa",
+        "parameters": [],
+        "tags": [
+          "HelloWorld"
+        ],
+        "responses": {
+          "200": {
+            "description": "Example",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Grandpa"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given origin.",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "description": "The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode (Request.credentials) is include",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

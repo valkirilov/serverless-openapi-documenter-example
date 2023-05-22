@@ -1,0 +1,9 @@
+# References:
+# - https://github.com/temando/serverless-openapi-documentation
+
+# TODO: Make it work by auto importing in the serverless/models.yml
+# Note: Now, this code is kept here only for sample, the original code is in the serverless/model.yml
+EchoHelloWorldResponse:
+  name: "EchoHelloWorldResponse"
+  description: "Response containing a greetings message"
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/EchoHelloWorldResponse.json)}

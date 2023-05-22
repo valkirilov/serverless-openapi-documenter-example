@@ -1,0 +1,9 @@
+{
+  "title": "GrandChild",
+  "type": "object",
+  "properties": {
+    "grandChild_property": {
+      "type": "string"
+    }
+  }
+}

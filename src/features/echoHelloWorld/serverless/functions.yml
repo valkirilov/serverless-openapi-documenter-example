@@ -1,0 +1,93 @@
+# Hello World module
+# References:
+# - https://www.serverless.com/framework/docs/providers/aws/guide/functions
+# - https://github.com/temando/serverless-openapi-documentation
+
+echoHelloWorld:
+  handler: dist/handlers.echoHelloWorldHandler
+  events:
+    - http:
+        path: /hello-world/{name}
+        method: get
+        cors: true
+        reqValidatorName: validator
+        operationId: echoHelloWorld
+        documentation:
+          summary: 'Simple serverless function which dumps a greeting'
+          description: "Just print 'Hello World' in the console and welcome the user"
+          tags:
+            - HelloWorld
+          pathParams:
+            - name: 'name'
+              description: 'The name of the user who we want to greet'
+              schema:
+                type: 'string'
+          methodResponses:
+            - statusCode: '200'
+              responseBody:
+                description: 'Returns response containing greetings message'
+              responseModels:
+                application/json: EchoHelloWorldResponse
+
+exampleSchemaChild:
+  handler: dist/handlers.echoHelloWorldHandler
+  events:
+    - http:
+        path: /hello-world/example-child
+        method: get
+        cors: true
+        reqValidatorName: validator
+        operationId: echoHelloWorld
+        documentation:
+          summary: 'Example to test schema generation docs'
+          description: 'Just an example'
+          tags:
+            - HelloWorld
+          methodResponses:
+            - statusCode: '200'
+              responseBody:
+                description: 'Example'
+              responseModels:
+                application/json: Child
+
+exampleSchemaParent:
+  handler: dist/handlers.echoHelloWorldHandler
+  events:
+    - http:
+        path: /hello-world/example-parent
+        method: get
+        cors: true
+        reqValidatorName: validator
+        operationId: echoHelloWorld
+        documentation:
+          summary: 'Example to test schema generation docs'
+          description: 'Just an example'
+          tags:
+            - HelloWorld
+          methodResponses:
+            - statusCode: '200'
+              responseBody:
+                description: 'Example'
+              responseModels:
+                application/json: Parent
+
+exampleSchemaGrandpa:
+  handler: dist/handlers.echoHelloWorldHandler
+  events:
+    - http:
+        path: /hello-world/example-grandpa
+        method: get
+        cors: true
+        reqValidatorName: validator
+        operationId: echoHelloWorld
+        documentation:
+          summary: 'Example to test schema generation docs'
+          description: 'Just an example'
+          tags:
+            - HelloWorld
+          methodResponses:
+            - statusCode: '200'
+              responseBody:
+                description: 'Example'
+              responseModels:
+                application/json: Grandpa

@@ -1,0 +1,28 @@
+##############
+# Hello World
+##############
+
+- name: 'EchoHelloWorldResponse'
+  description: 'Response containing a greetings message'
+  contentType: 'application/json'
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/EchoHelloWorldResponse.json)}
+
+- name: 'GrandChild'
+  description: 'GrandChild'
+  contentType: 'application/json'
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/GrandChild.json)}
+
+- name: 'Child'
+  description: 'Child'
+  contentType: 'application/json'
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/Child.json)}
+
+- name: 'Parent'
+  description: 'Parent'
+  contentType: 'application/json'
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/Parent.json)}
+
+- name: 'Grandpa'
+  description: 'Grandpa'
+  contentType: 'application/json'
+  schema: ${file(src/features/echoHelloWorld/serverless/schemas/Grandpa.json)}

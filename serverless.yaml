@@ -1,0 +1,73 @@
+# Reference: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/
+service: onboarding
+
+# List of 3rd party plugins used to enrich our capabilities
+plugins:
+  - serverless-offline
+  - serverless-deployment-bucket
+  - serverless-reqvalidator-plugin
+  - serverless-openapi-documenter
+
+# Define our Lambda functions definitions
+# Reference: https://www.serverless.com/framework/docs/providers/aws/guide/functions
+functions: ${file(./serverless/functions.js)}
+
+# The "Resources" used by our "Functions", raw AWS CloudFormation goes in here
+# Reference: TODO add link to docs
+resources:
+  Resources:
+    validator:
+      Type: AWS::ApiGateway::RequestValidator
+      Properties:
+        Name: "req-validator"
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true
+        ValidateRequestParameters: true
+
+# Load environment variables from .env files (default: false)
+# Reference: https://www.serverless.com/framework/docs/environment-variables
+useDotenv: true
+
+# General configurations for AWS
+# Reference: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/#provider
+provider:
+  name: aws
+  # Note: For some reason I got errors and had to revert the version (after adding SLS 3.0 to the package.json)
+  # TODO: Investigate and fix this issue or migrate to newest sls version again
+  runtime: nodejs14.x
+  region: eu-central-1
+
+  apiGateway:
+    request:
+      schemas: ${file(./serverless/models.js)}
+
+
+  # Default memory size for functions (default: 1024MB)
+  memorySize: 128
+
+  # Default timeout for functions (default: 6 seconds)
+  # Note: API Gateway has a maximum timeout of 30 seconds
+  timeout: 30
+
+  # Function environment variables
+  environment:
+    AWS_STAGE: ${env:AWS_STAGE}
+    AWS_REGION_ID: ${env:AWS_REGION_ID}
+
+# Optional deployment packaging configuration
+# Reference: https://www.serverless.com/framework/docs/providers/aws/guide/packaging/
+package:
+  patterns:
+    - "dist/**"
+    - "!storage/**"
+
+custom:
+  # Reference: https://www.serverless.com/plugins/serverless-openapi-documenter
+  documentation:
+    api:
+      info:
+        version: "1"
+        title: "Example"
+    description: "Example"
+    models: ${file(./serverless/documentation.yml)}

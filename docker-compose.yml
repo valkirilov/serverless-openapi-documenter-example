@@ -1,0 +1,18 @@
+# Reference: https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: '3.8'
+
+services:
+  example-app:
+    container_name: ${COMPOSE_PROJECT_NAME?}-APP
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Expose the application on the following ports
+    ports:
+      - 6060:6060
+
+    # Mount a volume with the application source code so we can automatically watch for changes and re-compile
+    volumes:
+      - .:/app

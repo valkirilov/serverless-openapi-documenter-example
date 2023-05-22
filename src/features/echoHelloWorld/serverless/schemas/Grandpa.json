@@ -1,0 +1,12 @@
+{
+  "title": "Grandpa",
+  "type": "object",
+  "properties": {
+    "grandpa_property": {
+      "type": "string"
+    },
+    "parent_reference": {
+      "$ref": "./src/features/echoHelloWorld/serverless/schemas/Parent.json"
+    }
+  }
+}
